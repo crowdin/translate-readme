@@ -1,0 +1,35 @@
+name: 'build-test'
+on:
+  pull_request:
+  push:
+    branches:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+          npm run package
+
+      - name: Lint
+        run: |
+          npm run lint
+          npm run check-format
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
