@@ -1,4 +1,4 @@
-name: 'translate-readme'
+name: 'Translate Readme'
 description: 'Automate translation of your README.md files via Crowdin'
 author: 'Andrii Bodnar'
 
