@@ -2,6 +2,10 @@ name: 'translate-readme'
 description: 'Automate translation of your README.md files via Crowdin'
 author: 'Andrii Bodnar'
 
+branding:
+  icon: 'file-text'
+  color: 'green'
+
 inputs:
   file:
     required: false
