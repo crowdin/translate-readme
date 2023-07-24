@@ -2,7 +2,7 @@
 
 :tada: First off, thanks for taking the time to contribute! :tada:
 
-The following is a set of guidelines for contributing to Readme Translate Action. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to Translate Readme Action. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 This project and everyone participating in it are governed by the [Code of Conduct](https://github.com/crowdin/.github/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
@@ -18,7 +18,7 @@ When you are creating a bug report, please include as many details as possible.
 
 #### How Do I Submit a Bug Report?
 
-Bugs are tracked as [GitHub issues](https://github.com/crowdin/readme-translate/issues/).
+Bugs are tracked as [GitHub issues](https://github.com/crowdin/translate-readme/issues/).
 
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
@@ -33,7 +33,7 @@ When you are creating an enhancement suggestion, please include as many details 
 
 #### How Do I Submit an Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](https://github.com/crowdin/readme-translate/issues/).
+Enhancement suggestions are tracked as [GitHub issues](https://github.com/crowdin/translate-readme/issues/).
 
 Create an issue on that repository and provide the following information:
 
@@ -44,10 +44,10 @@ Create an issue on that repository and provide the following information:
 
 ### Your First Code Contribution
 
-Unsure where to begin contributing to Readme Translate Action? You can start by looking through these `good-first-issue` and `help-wanted` issues:
+Unsure where to begin contributing to Translate Readme Action? You can start by looking through these `good-first-issue` and `help-wanted` issues:
 
-* [Good first issue](https://github.com/crowdin/readme-translate/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) - issues which should only require a small amount of code, and a test or two.
-* [Help wanted](https://github.com/crowdin/readme-translate/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) - issues which should be a bit more involved than `Good first issue` issues.
+* [Good first issue](https://github.com/crowdin/translate-readme/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) - issues which should only require a small amount of code, and a test or two.
+* [Help wanted](https://github.com/crowdin/translate-readme/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) - issues which should be a bit more involved than `Good first issue` issues.
 
 #### Pull Request Checklist
 
@@ -130,4 +130,4 @@ uses: ./
     CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 ```
 
-See the [actions tab](https://github.com/crowdin/readme-translate/actions) for runs of this action! :rocket:
+See the [actions tab](https://github.com/crowdin/translate-readme/actions) for runs of this action! :rocket:

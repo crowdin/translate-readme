@@ -80,8 +80,8 @@ describe('Writer', () => {
             const file = 'README.md';
             const mockFileContents = `
 Some content before
-<!-- README-TRANSLATE-LANGUAGES-START -->
-<!-- README-TRANSLATE-LANGUAGES-END -->
+<!-- TRANSLATE-README-LANGUAGES-START -->
+<!-- TRANSLATE-README-LANGUAGES-END -->
 Some content after
 `;
 
@@ -97,9 +97,9 @@ Some content after
 
             const expectedUpdatedFileContents = `
 Some content before
-<!-- README-TRANSLATE-LANGUAGES-START -->
+<!-- TRANSLATE-README-LANGUAGES-START -->
 ${expectedSwitcher}
-<!-- README-TRANSLATE-LANGUAGES-END -->
+<!-- TRANSLATE-README-LANGUAGES-END -->
 Some content after
 `;
 

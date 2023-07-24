@@ -1,5 +1,5 @@
 {
-  "name": "readme-translate",
+  "name": "translate-readme",
   "version": "0.1.0",
   "private": true,
   "description": "Automate translation of your README.md files via Crowdin",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crowdin/readme-translate"
+    "url": "git+https://github.com/crowdin/translate-readme"
   },
   "keywords": [
     "actions",

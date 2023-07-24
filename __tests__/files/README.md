@@ -4,8 +4,8 @@ Some super description
 
 ## Languages
 
-<!-- README-TRANSLATE-LANGUAGES-START -->
-<!-- README-TRANSLATE-LANGUAGES-END -->
+<!-- TRANSLATE-README-LANGUAGES-START -->
+<!-- TRANSLATE-README-LANGUAGES-END -->
 
 ## Usage
 

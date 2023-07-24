@@ -445,8 +445,8 @@ const fs_1 = __importDefault(__nccwpck_require__(7147));
 const path_1 = __nccwpck_require__(8040);
 class Writer {
     constructor(credentials, config, logger) {
-        this.placeholderStart = '<!-- README-TRANSLATE-LANGUAGES-START -->';
-        this.placeholderEnd = '<!-- README-TRANSLATE-LANGUAGES-END -->';
+        this.placeholderStart = '<!-- TRANSLATE-README-LANGUAGES-START -->';
+        this.placeholderEnd = '<!-- TRANSLATE-README-LANGUAGES-END -->';
         this.projectLanguages = [];
         this.credentials = credentials;
         this.config = config;

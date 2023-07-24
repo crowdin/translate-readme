@@ -1,11 +1,11 @@
-# Readme Translate [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fcrowdin%2Freadme-translate&text=A%20GitHub%20Action%20to%20automate%20the%20translation%20of%20your%20README%20files%20via%20Crowdin)&nbsp;[![GitHub Repo stars](https://img.shields.io/github/stars/crowdin/readme-translate?style=social&cacheSeconds=1800)](https://github.com/crowdin/readme-translate/stargazers)
+# Translate Readme [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fcrowdin%2Ftranslate-readme&text=A%20GitHub%20Action%20to%20automate%20the%20translation%20of%20your%20README%20files%20via%20Crowdin)&nbsp;[![GitHub Repo stars](https://img.shields.io/github/stars/crowdin/translate-readme?style=social&cacheSeconds=1800)](https://github.com/crowdin/translate-readme/stargazers)
 
 A GitHub Action to automate the translation of your README.md files via Crowdin ✨
 
-[![build-test](https://github.com/crowdin/readme-translate/actions/workflows/test.yml/badge.svg)](https://github.com/crowdin/readme-translate/actions/workflows/test.yml)
-[![e2e-test](https://github.com/crowdin/readme-translate/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/crowdin/readme-translate/actions/workflows/e2e-test.yml)
-[![codecov](https://codecov.io/github/crowdin/readme-translate/branch/main/graph/badge.svg?token=IWJHNN05QB)](https://codecov.io/github/crowdin/readme-translate)
-[![GitHub](https://img.shields.io/github/license/crowdin/readme-translate?cacheSeconds=50000)](https://github.com/crowdin/readme-translate/blob/master/LICENSE)
+[![build-test](https://github.com/crowdin/translate-readme/actions/workflows/test.yml/badge.svg)](https://github.com/crowdin/translate-readme/actions/workflows/test.yml)
+[![e2e-test](https://github.com/crowdin/translate-readme/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/crowdin/translate-readme/actions/workflows/e2e-test.yml)
+[![codecov](https://codecov.io/github/crowdin/translate-readme/branch/main/graph/badge.svg?token=IWJHNN05QB)](https://codecov.io/github/crowdin/translate-readme)
+[![GitHub](https://img.shields.io/github/license/crowdin/translate-readme?cacheSeconds=50000)](https://github.com/crowdin/translate-readme/blob/master/LICENSE)
 
 ## What does this action do?
 
@@ -15,13 +15,13 @@ A GitHub Action to automate the translation of your README.md files via Crowdin 
 
 ## Usage
 
-Set up a workflow in *.github/workflows/readme-translate.yml* (or add a job to your existing workflows).
+Set up a workflow in *.github/workflows/translate-readme.yml* (or add a job to your existing workflows).
 
 Read the [Configuring a workflow](https://help.github.com/en/articles/configuring-a-workflow) article for more details on how to create and set up custom workflows.
 
 ```yaml
-# .github/workflows/readme-translate.yml
-name: Readme Translate
+# .github/workflows/translate-readme.yml
+name: Translate Readme
 
 on:
   # When you push to the `main` branch
@@ -34,15 +34,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  readme-translate:
+  translate-readme:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Readme Translate
-      uses: crowdin/readme-translate@v0.1.0
+    - name: Translate Readme
+      uses: crowdin/translate-readme@v0.1.0
       env:
         CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
@@ -55,8 +55,8 @@ jobs:
 To create a PR with the updated table, we recommend usage of the [Create Pull Request](https://github.com/peter-evans/create-pull-request) Action:
 
 ```yaml
-# .github/workflows/readme-translate.yml
-name: Readme Translate
+# .github/workflows/translate-readme.yml
+name: Translate Readme
 
 on:
   # When you push to the `main` branch
@@ -69,15 +69,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  readme-translate:
+  translate-readme:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Readme Translate
-      uses: crowdin/readme-translate@v0.1.0
+    - name: Translate Readme
+      uses: crowdin/translate-readme@v0.1.0
       env:
         CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
@@ -86,7 +86,7 @@ jobs:
       uses: peter-evans/create-pull-request@v4
       with:
         title: New Readme Translations by Crowdin
-        body: By [readme-translate](https://github.com/crowdin/readme-translate) GitHub action
+        body: By [translate-readme](https://github.com/crowdin/translate-readme) GitHub action
         commit-message: New Readme Translations
         committer: Crowdin Bot <support+bot@crowdin.com>
         branch: docs/readme-translations
@@ -94,20 +94,20 @@ jobs:
 
 ### Languages Switcher
 
-The Readme Translate Action will automatically add a language switcher to your `README.md` file.
+The Translate Readme Action will automatically add a language switcher to your `README.md` file.
 
 To enable it, add the following placeholders to your `README.md` file:
 
 ```
-<!-- README-TRANSLATE-LANGUAGES-START -->
-<!-- README-TRANSLATE-LANGUAGES-END -->
+<!-- TRANSLATE-README-LANGUAGES-START -->
+<!-- TRANSLATE-README-LANGUAGES-END -->
 ```
 
 Also, don't forget to add the following option to your workflow step:
 
 ```diff
-​- name: Readme Translate
-  uses: crowdin/readme-translate@v0.1.0
+​- name: Translate Readme
+  uses: crowdin/translate-readme@v0.1.0
   with:
 +    language_switcher: true
   env:
@@ -139,15 +139,15 @@ Also, don't forget to add the following option to your workflow step:
 You can Pre-Translate your `README.md` file before creating a PR. Use the following configuration for that:
 
 ```yaml
-# .github/workflows/readme-translate.yml
-name: Readme Translate
+# .github/workflows/translate-readme.yml
+name: Translate Readme
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  readme-translate:
+  translate-readme:
     runs-on: ubuntu-latest
 
     steps:
@@ -155,7 +155,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Upload README.md to Crowdin
-        uses: crowdin/readme-translate@v0.1.0
+        uses: crowdin/translate-readme@v0.1.0
         with:
           upload_sources: true
           download_translations: false
@@ -173,7 +173,7 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Download Readme translations from Crowdin
-        uses: crowdin/readme-translate@v0.1.0
+        uses: crowdin/translate-readme@v0.1.0
         with:
           upload_sources: false
           download_translations: true
@@ -197,7 +197,7 @@ If you want to contribute please read the [Contributing](/CONTRIBUTING.md) guide
 ## License
 
 <pre>
-The Readme Translate Action is licensed under the MIT License.
+The Translate Readme Action is licensed under the MIT License.
 See the LICENSE file distributed with this work for additional
 information regarding copyright ownership.
 

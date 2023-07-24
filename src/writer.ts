@@ -5,8 +5,8 @@ import {LanguagesModel} from '@crowdin/crowdin-api-client';
 import {baseName, generateRelativeFileLink, toPlatformPath} from './utils/path';
 
 export class Writer {
-    private placeholderStart = '<!-- README-TRANSLATE-LANGUAGES-START -->';
-    private placeholderEnd = '<!-- README-TRANSLATE-LANGUAGES-END -->';
+    private placeholderStart = '<!-- TRANSLATE-README-LANGUAGES-START -->';
+    private placeholderEnd = '<!-- TRANSLATE-README-LANGUAGES-END -->';
 
     private credentials: CredentialsConfig;
     private config: Config;
