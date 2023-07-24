@@ -2,6 +2,11 @@
 
 A GitHub Action to automate the translation of your README.md files via Crowdin ✨
 
+[![build-test](https://github.com/crowdin/readme-translate/actions/workflows/test.yml/badge.svg)](https://github.com/crowdin/readme-translate/actions/workflows/test.yml)
+[![e2e-test](https://github.com/crowdin/readme-translate/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/crowdin/readme-translate/actions/workflows/e2e-test.yml)
+[![codecov](https://codecov.io/github/crowdin/readme-translate/branch/main/graph/badge.svg?token=IWJHNN05QB)](https://codecov.io/github/crowdin/readme-translate)
+[![GitHub](https://img.shields.io/github/license/crowdin/readme-translate?cacheSeconds=50000)](https://github.com/crowdin/readme-translate/blob/master/LICENSE)
+
 ## What does this action do?
 
 - Upload your `README.md` file to Crowdin
