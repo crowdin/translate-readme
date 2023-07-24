@@ -1,0 +1,34 @@
+name: 'readme-translate'
+description: 'Automate translation of your README.md files via Crowdin'
+author: 'Andrii Bodnar'
+
+inputs:
+  file:
+    required: false
+    description: 'The Readme file name'
+    default: 'README.md'
+  branch:
+    required: false
+    description: 'Specify branch name to create in Crowdin'
+  destination:
+    required: false
+    description: 'A directory where the localized readmes will be placed'
+    default: './'
+  languages:
+    required: false
+    description: 'A list of languages to translate the Readme'
+  language_switcher:
+    required: false
+    description: 'Defines whether to add a language switcher to the Readme'
+    default: 'false'
+  upload_sources:
+    required: false
+    description: 'Defines whether to upload the source file to Crowdin'
+    default: 'true'
+  download_translations:
+    required: false
+    description: 'Defines whether to download translations from Crowdin'
+    default: 'true'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

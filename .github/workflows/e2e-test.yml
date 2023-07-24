@@ -1,0 +1,31 @@
+name: 'e2e-test'
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          file: __tests__/files/README.md
+          destination: __tests__/files/docs
+          language_switcher: true
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: List files
+        run: |
+          cd ./__tests__/files
+
+          echo "Source file:"
+          cat README.md
+
+          cd docs
+
+          echo "Translated files:"
+          ls -la
+          cat README.fr-FR.md
