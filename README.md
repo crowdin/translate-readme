@@ -71,6 +71,9 @@ on:
 jobs:
   translate-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
     - name: Checkout
@@ -83,7 +86,7 @@ jobs:
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v5
       with:
         title: New Readme Translations by Crowdin
         body: By [translate-readme](https://github.com/crowdin/translate-readme) GitHub action
@@ -149,6 +152,9 @@ on:
 jobs:
   translate-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -185,6 +191,10 @@ jobs:
 ```
 
 For more about the Pre-Translate command arguments, please refer to the official [Crowdin CLI documentation](https://crowdin.github.io/crowdin-cli/commands/crowdin-pre-translate).
+
+## Demo
+
+Visit the [translate-readme-demo](https://github.com/andrii-bodnar/translate-readme-demo) to see how the action works in a real project.
 
 ## Contributing
 
