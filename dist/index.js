@@ -3294,6 +3294,7 @@ const issues_1 = __nccwpck_require__(4600);
 const labels_1 = __nccwpck_require__(8203);
 const languages_1 = __nccwpck_require__(1560);
 const machineTranslation_1 = __nccwpck_require__(9262);
+const notifications_1 = __nccwpck_require__(5806);
 const organizationWebhooks_1 = __nccwpck_require__(9643);
 const projectsGroups_1 = __nccwpck_require__(2305);
 const reports_1 = __nccwpck_require__(3828);
@@ -3321,6 +3322,7 @@ __exportStar(__nccwpck_require__(4600), exports);
 __exportStar(__nccwpck_require__(8203), exports);
 __exportStar(__nccwpck_require__(1560), exports);
 __exportStar(__nccwpck_require__(9262), exports);
+__exportStar(__nccwpck_require__(5806), exports);
 __exportStar(__nccwpck_require__(9643), exports);
 __exportStar(__nccwpck_require__(2305), exports);
 __exportStar(__nccwpck_require__(3828), exports);
@@ -3371,6 +3373,7 @@ class Client extends core_1.CrowdinApi {
         this.labelsApi = new labels_1.Labels(credentials, config);
         this.stringCommentsApi = new stringComments_1.StringComments(credentials, config);
         this.bundlesApi = new bundles_1.Bundles(credentials, config);
+        this.notificationsApi = new notifications_1.Notifications(credentials, config);
     }
 }
 exports["default"] = Client;
@@ -3649,6 +3652,46 @@ class MachineTranslation extends core_1.CrowdinApi {
     }
 }
 exports.MachineTranslation = MachineTranslation;
+
+
+/***/ }),
+
+/***/ 5806:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Notifications = void 0;
+const core_1 = __nccwpck_require__(4275);
+class Notifications extends core_1.CrowdinApi {
+    /**
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.notify.post
+     */
+    sendNotificationToAuthenticatedUser(request) {
+        const url = `${this.url}/notify`;
+        return this.post(url, request, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.notify.post
+     */
+    sendNotificationToProjectMembers(projectId, request) {
+        const url = `${this.url}/projects/${projectId}/notify`;
+        return this.post(url, request, this.defaultConfig());
+    }
+    /**
+     * @param request request body
+     * @see https://developer.crowdin.com/enterprise/api/v2/#operation/api.notify.post
+     */
+    sendNotificationToOrganizationMembers(request) {
+        const url = `${this.url}/notify`;
+        return this.post(url, request, this.defaultConfig());
+    }
+}
+exports.Notifications = Notifications;
 
 
 /***/ }),
