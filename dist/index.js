@@ -1052,7 +1052,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
@@ -2256,6 +2256,74 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
+/***/ 669:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Applications = void 0;
+const core_1 = __nccwpck_require__(4275);
+/**
+ * Crowdin Apps are web applications that can be integrated with Crowdin to extend its functionality.
+ *
+ * Use the API to manage the necessary app data.
+ */
+class Applications extends core_1.CrowdinApi {
+    /**
+     * @param applicationId application identifier
+     * @param path path implemented by the application
+     * @see https://developer.crowdin.com/api/v2/#operation/api.applications.api.get
+     */
+    getApplicationData(applicationId, path) {
+        const url = `${this.url}/applications/${applicationId}/api/${path}`;
+        return this.get(url, this.defaultConfig());
+    }
+    /**
+     * @param applicationId application identifier
+     * @param path path implemented by the application
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.applications.api.put
+     */
+    updateOrRestoreApplicationData(applicationId, path, request) {
+        const url = `${this.url}/applications/${applicationId}/api/${path}`;
+        return this.put(url, request, this.defaultConfig());
+    }
+    /**
+     * @param applicationId application identifier
+     * @param path path implemented by the application
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.applications.api.post
+     */
+    addApplicationData(applicationId, path, request) {
+        const url = `${this.url}/applications/${applicationId}/api/${path}`;
+        return this.post(url, request, this.defaultConfig());
+    }
+    /**
+     * @param applicationId application identifier
+     * @param path path implemented by the application
+     * @see https://developer.crowdin.com/api/v2/#operation/api.applications.api.delete
+     */
+    deleteApplicationData(applicationId, path) {
+        const url = `${this.url}/applications/${applicationId}/api/${path}`;
+        return this.delete(url, this.defaultConfig());
+    }
+    /**
+     * @param applicationId application identifier
+     * @param path path implemented by the application
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.applications.api.patch
+     */
+    editApplicationData(applicationId, path, request) {
+        const url = `${this.url}/applications/${applicationId}/api/${path}`;
+        return this.patch(url, request, this.defaultConfig());
+    }
+}
+exports.Applications = Applications;
+
+
+/***/ }),
+
 /***/ 3436:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -2350,8 +2418,46 @@ class Bundles extends core_1.CrowdinApi {
         const url = `${this.url}/projects/${projectId}/bundles/${bundleId}/files`;
         return this.getList(url, options === null || options === void 0 ? void 0 : options.limit, options === null || options === void 0 ? void 0 : options.offset);
     }
+    /**
+     * @param projectId project identifier
+     * @param bundleId bundle identifier
+     * @param options optional parameters for the request
+     */
+    listBundleBranches(projectId, bundleId, options) {
+        const url = `${this.url}/projects/${projectId}/bundles/${bundleId}/branches`;
+        return this.getList(url, options === null || options === void 0 ? void 0 : options.limit, options === null || options === void 0 ? void 0 : options.offset);
+    }
 }
 exports.Bundles = Bundles;
+
+
+/***/ }),
+
+/***/ 1744:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Clients = void 0;
+const core_1 = __nccwpck_require__(4275);
+/**
+ * Clients are the organizations that order professional translation services from Vendors.
+ * Clients can invite an existing organization to become a Vendor for them.
+ *
+ * Use the API to get a list of the Clients you already cooperate with as a Vendor.
+ */
+class Clients extends core_1.CrowdinApi {
+    /**
+     * @param options optional pagination parameters for the request
+     * @see https://developer.crowdin.com/enterprise/api/v2/#operation/api.clients.getMany
+     */
+    listClients(options) {
+        const url = `${this.url}/clients`;
+        return this.getList(url, options === null || options === void 0 ? void 0 : options.limit, options === null || options === void 0 ? void 0 : options.offset);
+    }
+}
+exports.Clients = Clients;
 
 
 /***/ }),
@@ -2430,8 +2536,11 @@ function handleHttpClientError(error) {
         const validationCodes = [];
         const validationMessages = [];
         crowdinResponseErrors.forEach((e) => {
-            var _a;
-            if (e.error.key && Array.isArray((_a = e.error) === null || _a === void 0 ? void 0 : _a.errors)) {
+            var _a, _b;
+            if (typeof e.index === 'number' && Array.isArray(e.errors)) {
+                throw new CrowdinValidationError(JSON.stringify(crowdinResponseErrors, null, 2), []);
+            }
+            if (((_a = e.error) === null || _a === void 0 ? void 0 : _a.key) && Array.isArray((_b = e.error) === null || _b === void 0 ? void 0 : _b.errors)) {
                 const codes = [];
                 e.error.errors.forEach((er) => {
                     if (er.message && er.code) {
@@ -3285,7 +3394,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const applications_1 = __nccwpck_require__(669);
 const bundles_1 = __nccwpck_require__(3436);
+const clients_1 = __nccwpck_require__(1744);
 const core_1 = __nccwpck_require__(4275);
 const dictionaries_1 = __nccwpck_require__(8252);
 const distributions_1 = __nccwpck_require__(3146);
@@ -3313,7 +3424,9 @@ const users_1 = __nccwpck_require__(8865);
 const vendors_1 = __nccwpck_require__(5770);
 const webhooks_1 = __nccwpck_require__(919);
 const workflows_1 = __nccwpck_require__(6184);
+__exportStar(__nccwpck_require__(669), exports);
 __exportStar(__nccwpck_require__(3436), exports);
+__exportStar(__nccwpck_require__(1744), exports);
 __exportStar(__nccwpck_require__(4275), exports);
 __exportStar(__nccwpck_require__(8252), exports);
 __exportStar(__nccwpck_require__(3146), exports);
@@ -3347,6 +3460,7 @@ __exportStar(__nccwpck_require__(6184), exports);
 class Client extends core_1.CrowdinApi {
     constructor(credentials, config) {
         super(credentials, config);
+        this.applicationsApi = new applications_1.Applications(credentials, config);
         this.sourceFilesApi = new sourceFiles_1.SourceFiles(credentials, config);
         this.glossariesApi = new glossaries_1.Glossaries(credentials, config);
         this.languagesApi = new languages_1.Languages(credentials, config);
@@ -3374,6 +3488,7 @@ class Client extends core_1.CrowdinApi {
         this.stringCommentsApi = new stringComments_1.StringComments(credentials, config);
         this.bundlesApi = new bundles_1.Bundles(credentials, config);
         this.notificationsApi = new notifications_1.Notifications(credentials, config);
+        this.clientsApi = new clients_1.Clients(credentials, config);
     }
 }
 exports["default"] = Client;
@@ -3437,7 +3552,8 @@ class Labels extends core_1.CrowdinApi {
         if ((0, core_1.isOptionalNumber)(options, '1' in arguments)) {
             options = { limit: options, offset: deprecatedOffset };
         }
-        const url = `${this.url}/projects/${projectId}/labels`;
+        let url = `${this.url}/projects/${projectId}/labels`;
+        url = this.addQueryParam(url, 'isSystem', options.isSystem);
         return this.getList(url, options.limit, options.offset);
     }
     /**
@@ -3930,6 +4046,52 @@ class ProjectsGroups extends core_1.CrowdinApi {
      */
     editProjectFileFormatSettings(projectId, fileFormatSettingsId, request) {
         const url = `${this.url}/projects/${projectId}/file-format-settings/${fileFormatSettingsId}`;
+        return this.patch(url, request, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param options optional parameters for the request
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.getMany
+     */
+    listProjectStringsExporterSettings(projectId, options) {
+        const url = `${this.url}/projects/${projectId}/strings-exporter-settings`;
+        return this.getList(url, options === null || options === void 0 ? void 0 : options.limit, options === null || options === void 0 ? void 0 : options.offset);
+    }
+    /**
+     * @param projectId project identifier
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.post
+     */
+    addProjectStringsExporterSettings(projectId, request) {
+        const url = `${this.url}/projects/${projectId}/strings-exporter-settings`;
+        return this.post(url, request, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param systemStringsExporterSettingsId file format settings identifier
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.get
+     */
+    getProjectStringsExporterSettings(projectId, systemStringsExporterSettingsId) {
+        const url = `${this.url}/projects/${projectId}/strings-exporter-settings/${systemStringsExporterSettingsId}`;
+        return this.get(url, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param systemStringsExporterSettingsId file format settings identifier
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.delete
+     */
+    deleteProjectStringsExporterSettings(projectId, systemStringsExporterSettingsId) {
+        const url = `${this.url}/projects/${projectId}/strings-exporter-settings/${systemStringsExporterSettingsId}`;
+        return this.delete(url, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param systemStringsExporterSettingsId file format settings identifier
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.patch
+     */
+    editProjectStringsExporterSettings(projectId, systemStringsExporterSettingsId, request) {
+        const url = `${this.url}/projects/${projectId}/strings-exporter-settings/${systemStringsExporterSettingsId}`;
         return this.patch(url, request, this.defaultConfig());
     }
 }
@@ -4510,6 +4672,11 @@ var SourceFilesModel;
         EscapeQuotes[EscapeQuotes["TWO"] = 2] = "TWO";
         EscapeQuotes[EscapeQuotes["THREE"] = 3] = "THREE";
     })(EscapeQuotes = SourceFilesModel.EscapeQuotes || (SourceFilesModel.EscapeQuotes = {}));
+    let ExportQuotes;
+    (function (ExportQuotes) {
+        ExportQuotes["SINGLE"] = "single";
+        ExportQuotes["DOUBLE"] = "double";
+    })(ExportQuotes = SourceFilesModel.ExportQuotes || (SourceFilesModel.ExportQuotes = {}));
 })(SourceFilesModel = exports.SourceFilesModel || (exports.SourceFilesModel = {}));
 
 
@@ -4529,6 +4696,22 @@ const core_1 = __nccwpck_require__(4275);
  * Use API to add, edit, or delete some specific strings in the source-based and files-based projects.
  */
 class SourceStrings extends core_1.CrowdinApi {
+    /**
+     * @param projectId project identifier
+     * @param uploadId export identifier
+     */
+    uploadStringsStatus(projectId, uploadId) {
+        const url = `${this.url}/projects/${projectId}/strings/uploads/${uploadId}`;
+        return this.get(url, this.defaultConfig());
+    }
+    /**
+     * @param projectId project identifier
+     * @param request request payload
+     */
+    uploadStrings(projectId, request) {
+        const url = `${this.url}/projects/${projectId}/strings/uploads`;
+        return this.post(url, request, this.defaultConfig());
+    }
     listProjectStrings(projectId, options, deprecatedLimit, deprecatedOffset, deprecatedFilter, deprecatedDenormalizePlaceholders, deprecatedLabelIds, deprecatedScope, deprecatedCroql, deprecatedBranchId, deprecatedDirectoryId) {
         let url = `${this.url}/projects/${projectId}/strings`;
         if ((0, core_1.isOptionalNumber)(options, '1' in arguments)) {
@@ -4576,10 +4759,12 @@ class SourceStrings extends core_1.CrowdinApi {
     /**
      * @param projectId project identifier
      * @param stringId string identifier
+     * @param query query params
      * @see https://developer.crowdin.com/api/v2/#operation/api.projects.strings.get
      */
-    getString(projectId, stringId) {
-        const url = `${this.url}/projects/${projectId}/strings/${stringId}`;
+    getString(projectId, stringId, query) {
+        let url = `${this.url}/projects/${projectId}/strings/${stringId}`;
+        url = this.addQueryParam(url, 'denormalizePlaceholders', query === null || query === void 0 ? void 0 : query.denormalizePlaceholders);
         return this.get(url, this.defaultConfig());
     }
     /**
@@ -4701,7 +4886,7 @@ const core_1 = __nccwpck_require__(4275);
  * Use API to add or remove strings translations, approvals, and votes.
  */
 class StringTranslations extends core_1.CrowdinApi {
-    listTranslationApprovals(projectId, options, deprecatedLanguageId, deprecatedTranslationId, deprecatedLimit, deprecatedOffset, deprecatedFileId) {
+    listTranslationApprovals(projectId, options, deprecatedLanguageId, deprecatedTranslationId, deprecatedLimit, deprecatedOffset, deprecatedFileId, deprecatedLabelIds, deprecatedExcludeLabelIds) {
         let url = `${this.url}/projects/${projectId}/approvals`;
         if ((0, core_1.isOptionalNumber)(options, '1' in arguments)) {
             options = {
@@ -4711,12 +4896,16 @@ class StringTranslations extends core_1.CrowdinApi {
                 limit: deprecatedLimit,
                 offset: deprecatedOffset,
                 fileId: deprecatedFileId,
+                labelIds: deprecatedLabelIds,
+                excludeLabelIds: deprecatedExcludeLabelIds,
             };
         }
         url = this.addQueryParam(url, 'stringId', options.stringId);
         url = this.addQueryParam(url, 'languageId', options.languageId);
         url = this.addQueryParam(url, 'translationId', options.translationId);
         url = this.addQueryParam(url, 'fileId', options.fileId);
+        url = this.addQueryParam(url, 'labelIds', options.labelIds);
+        url = this.addQueryParam(url, 'excludeLabelIds', options.excludeLabelIds);
         return this.getList(url, options.limit, options.offset);
     }
     /**
@@ -4825,7 +5014,7 @@ class StringTranslations extends core_1.CrowdinApi {
      * @see https://developer.crowdin.com/api/v2/#operation/api.projects.translations.put
      */
     restoreTranslation(projectId, translationId) {
-        const url = `${this.url}/projects/${projectId}/translations/${translationId}/restore`;
+        const url = `${this.url}/projects/${projectId}/translations/${translationId}`;
         return this.put(url, {}, this.defaultConfig());
     }
     /**
@@ -4837,13 +5026,15 @@ class StringTranslations extends core_1.CrowdinApi {
         const url = `${this.url}/projects/${projectId}/translations/${translationId}`;
         return this.delete(url, this.defaultConfig());
     }
-    listTranslationVotes(projectId, options, deprecatedLanguageId, deprecatedTranslationId, deprecatedLimit, deprecatedOffset) {
+    listTranslationVotes(projectId, options, deprecatedLanguageId, deprecatedTranslationId, deprecatedLabelIds, deprecatedExcludeLabelIds, deprecatedLimit, deprecatedOffset) {
         let url = `${this.url}/projects/${projectId}/votes`;
         if ((0, core_1.isOptionalNumber)(options, '1' in arguments)) {
             options = {
                 stringId: options,
                 languageId: deprecatedLanguageId,
                 translationId: deprecatedTranslationId,
+                labelIds: deprecatedLabelIds,
+                excludeLabelIds: deprecatedExcludeLabelIds,
                 limit: deprecatedLimit,
                 offset: deprecatedOffset,
             };
@@ -4851,6 +5042,8 @@ class StringTranslations extends core_1.CrowdinApi {
         url = this.addQueryParam(url, 'stringId', options.stringId);
         url = this.addQueryParam(url, 'languageId', options.languageId);
         url = this.addQueryParam(url, 'translationId', options.translationId);
+        url = this.addQueryParam(url, 'labelIds', options.labelIds);
+        url = this.addQueryParam(url, 'excludeLabelIds', options.excludeLabelIds);
         return this.getList(url, options.limit, options.offset);
     }
     /**
@@ -4908,6 +5101,7 @@ class Tasks extends core_1.CrowdinApi {
         }
         let url = `${this.url}/projects/${projectId}/tasks`;
         url = this.addQueryParam(url, 'status', options.status);
+        url = this.addQueryParam(url, 'assigneeId', options.assigneeId);
         return this.getList(url, options.limit, options.offset);
     }
     /**
@@ -5035,8 +5229,18 @@ var TasksModel;
     (function (Type) {
         Type[Type["TRANSLATE"] = 0] = "TRANSLATE";
         Type[Type["PROOFREAD"] = 1] = "PROOFREAD";
-        Type[Type["TRANSLATE_BY_VENDOR"] = 2] = "TRANSLATE_BY_VENDOR";
     })(Type = TasksModel.Type || (TasksModel.Type = {}));
+    let TypeVendor;
+    (function (TypeVendor) {
+        TypeVendor[TypeVendor["TRANSLATE_BY_VENDOR"] = 2] = "TRANSLATE_BY_VENDOR";
+        TypeVendor[TypeVendor["PROOFREAD_BY_VENDOR"] = 3] = "PROOFREAD_BY_VENDOR";
+    })(TypeVendor = TasksModel.TypeVendor || (TasksModel.TypeVendor = {}));
+    let TranslatedExpertise;
+    (function (TranslatedExpertise) {
+        TranslatedExpertise["ECONOMY"] = "P";
+        TranslatedExpertise["PROFESSIONAL"] = "T";
+        TranslatedExpertise["PREMIUM"] = "R";
+    })(TranslatedExpertise = TasksModel.TranslatedExpertise || (TasksModel.TranslatedExpertise = {}));
 })(TasksModel = exports.TasksModel || (exports.TasksModel = {}));
 
 
@@ -5162,6 +5366,7 @@ class TranslationMemory extends core_1.CrowdinApi {
         }
         let url = `${this.url}/tms`;
         url = this.addQueryParam(url, 'groupId', options.groupId);
+        url = this.addQueryParam(url, 'userId', options.userId);
         return this.getList(url, options.limit, options.offset);
     }
     /**
@@ -5298,6 +5503,17 @@ class TranslationMemory extends core_1.CrowdinApi {
     /**
      * @param tmId tm identifier
      * @param segmentId segment identifier
+     * @param request request body
+     * @see https://developer.crowdin.com/api/v2/#operation/api.tms.segments.patch
+     */
+    editTmSegment(tmId, segmentId, request) {
+        const url = `${this.url}/tms/${tmId}/segments/${segmentId}`;
+        return this.patch(url, request, this.defaultConfig());
+    }
+    /**
+     * @deprecated
+     * @param tmId tm identifier
+     * @param segmentId segment identifier
      * @param recordId record identifier
      * @see https://developer.crowdin.com/api/v2/#operation/api.tms.segments.records.delete
      */
@@ -5306,6 +5522,7 @@ class TranslationMemory extends core_1.CrowdinApi {
         return this.delete(url, this.defaultConfig());
     }
     /**
+     * @deprecated
      * @param tmId tm identifier
      * @param segmentId segment identifier
      * @param recordId record identifier
@@ -5317,6 +5534,7 @@ class TranslationMemory extends core_1.CrowdinApi {
         return this.patch(url, request, this.defaultConfig());
     }
     /**
+     * @deprecated
      * @param tmId tm identifier
      * @param segmentId segment identifier
      * @param request request body
@@ -5487,6 +5705,10 @@ class Translations extends core_1.CrowdinApi {
      * @see https://developer.crowdin.com/api/v2/#operation/api.projects.translations.postOnLanguage
      */
     uploadTranslation(projectId, languageId, request) {
+        const url = `${this.url}/projects/${projectId}/translations/${languageId}`;
+        return this.post(url, request, this.defaultConfig());
+    }
+    uploadTranslationStrings(projectId, languageId, request) {
         const url = `${this.url}/projects/${projectId}/translations/${languageId}`;
         return this.post(url, request, this.defaultConfig());
     }
@@ -6543,6 +6765,7 @@ class Users extends core_1.CrowdinApi {
         url = this.addQueryParam(url, 'search', options.search);
         url = this.addQueryParam(url, 'role', options.role);
         url = this.addQueryParam(url, 'languageId', options.languageId);
+        url = this.addQueryParam(url, 'workflowStepId', options.workflowStepId);
         return this.getList(url, options.limit, options.offset);
     }
     /**
