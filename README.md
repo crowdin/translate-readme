@@ -39,10 +39,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Translate Readme
-      uses: crowdin/translate-readme@v0.1.0
+      uses: crowdin/translate-readme@v0.1.1
       env:
         CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
@@ -77,10 +77,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Translate Readme
-      uses: crowdin/translate-readme@v0.1.0
+      uses: crowdin/translate-readme@v0.1.1
       env:
         CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
@@ -110,7 +110,7 @@ Also, don't forget to add the following option to your workflow step:
 
 ```diff
 ​- name: Translate Readme
-  uses: crowdin/translate-readme@v0.1.0
+  uses: crowdin/translate-readme@v0.1.1
   with:
 +    language_switcher: true
   env:
@@ -158,10 +158,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Upload README.md to Crowdin
-        uses: crowdin/translate-readme@v0.1.0
+        uses: crowdin/translate-readme@v0.1.1
         with:
           upload_sources: true
           download_translations: false
@@ -179,7 +179,7 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Download Readme translations from Crowdin
-        uses: crowdin/translate-readme@v0.1.0
+        uses: crowdin/translate-readme@v0.1.1
         with:
           upload_sources: false
           download_translations: true
