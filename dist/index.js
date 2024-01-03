@@ -2545,11 +2545,11 @@ function handleHttpClientError(error) {
         const validationCodes = [];
         const validationMessages = [];
         crowdinResponseErrors.forEach((e) => {
-            var _a, _b;
-            if (typeof e.index === 'number' && Array.isArray(e.errors)) {
+            var _a, _b, _c;
+            if (typeof e.index === 'number' || typeof ((_a = e.error) === null || _a === void 0 ? void 0 : _a.key) === 'number') {
                 throw new CrowdinValidationError(JSON.stringify(crowdinResponseErrors, null, 2), []);
             }
-            if (((_a = e.error) === null || _a === void 0 ? void 0 : _a.key) && Array.isArray((_b = e.error) === null || _b === void 0 ? void 0 : _b.errors)) {
+            if (((_b = e.error) === null || _b === void 0 ? void 0 : _b.key) && Array.isArray((_c = e.error) === null || _c === void 0 ? void 0 : _c.errors)) {
                 const codes = [];
                 e.error.errors.forEach((er) => {
                     if (er.message && er.code) {
