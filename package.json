@@ -37,7 +37,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@crowdin/crowdin-api-client": "^1.28.2",
+    "@crowdin/crowdin-api-client": "^1.29.5",
     "adm-zip": "^0.5.10"
   },
   "devDependencies": {
