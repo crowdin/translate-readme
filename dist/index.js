@@ -288,7 +288,9 @@ class Translator {
     getFile() {
         return __awaiter(this, void 0, void 0, function* () {
             const files = yield this.crowdin.sourceFilesApi.listProjectFiles(this.credentials.projectId);
-            const sourceFile = files.data.find(file => file.data.path === this.getCrowdinFilePath());
+            const sourceFile = files.data.find(file => {
+                return file.data.path.toLowerCase() === this.getCrowdinFilePath().toLowerCase();
+            });
             return sourceFile === null || sourceFile === void 0 ? void 0 : sourceFile.data;
         });
     }

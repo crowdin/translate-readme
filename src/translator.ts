@@ -139,7 +139,9 @@ export class Translator {
     private async getFile(): Promise<SourceFilesModel.File | undefined> {
         const files = await this.crowdin.sourceFilesApi.listProjectFiles(this.credentials.projectId);
 
-        const sourceFile = files.data.find(file => file.data.path === this.getCrowdinFilePath());
+        const sourceFile = files.data.find(file => {
+            return file.data.path.toLowerCase() === this.getCrowdinFilePath().toLowerCase();
+        });
 
         return sourceFile?.data;
     }
